@@ -26,4 +26,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/kofiamankwabonsu/github-actions-basics/app:latest/app:latest
+          tags: ghcr.io/kofiamankwabonsu/github-actions-basics/app:latest
