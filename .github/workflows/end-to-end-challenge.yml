@@ -22,18 +22,11 @@ jobs:
         run: npm test
 
 
-name: Docker build
-
-on: [push]
-
-permissions:
-  contents: read
-  packages: write
-
-jobs:
   build:
     needs: ci
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,11 +46,6 @@ jobs:
 
 
 
-name: Deploy to Production server
-
-on: push
-
-jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
