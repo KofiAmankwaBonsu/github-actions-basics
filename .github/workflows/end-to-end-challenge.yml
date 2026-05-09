@@ -1,9 +1,9 @@
-name: ci
+name: End-to-End pipeline
 
 on: [push]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
