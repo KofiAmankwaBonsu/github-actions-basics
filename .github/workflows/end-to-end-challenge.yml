@@ -22,11 +22,9 @@ jobs:
         run: npm test
 
 
-name: Docker Publish
+name: Docker build
 
-on:
-  push:
-    branches: ["master", "main"]
+on: [push]
 
 permissions:
   contents: read
@@ -55,7 +53,7 @@ jobs:
 
 
 
-name: Deploy to Production
+name: Deploy to Production server
 
 on: push
 
