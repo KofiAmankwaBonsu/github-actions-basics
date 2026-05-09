@@ -20,3 +20,51 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+
+name: Docker Publish
+
+on:
+  push:
+    branches: ["master", "main"]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/kofiamankwabonsu/github-actions-basics/app:latest
+
+
+
+name: Deploy to Production
+
+on: push
+
+jobs:
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart Application
+        run: |
+          echo "Deploying application..."
+          echo "Restarting server..."
